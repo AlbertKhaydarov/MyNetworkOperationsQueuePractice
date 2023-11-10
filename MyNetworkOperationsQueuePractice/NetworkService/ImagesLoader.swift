@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol ImagesLoading {
+protocol ImagesLoadingProtocol {
     func loadImages(handler: @escaping (Result<ResponseModel, Error>) -> Void)
 }
 
-struct ImagesLoader: ImagesLoading {
+struct ImagesLoader: ImagesLoadingProtocol {
     
     // MARK: - NetworkClient
     private let networkClient: NetworkRouting

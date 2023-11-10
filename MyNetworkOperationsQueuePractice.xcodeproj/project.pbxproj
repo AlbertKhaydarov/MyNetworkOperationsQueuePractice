@@ -17,6 +17,8 @@
 		7C189F552AFE429B00036BFA /* ResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C189F542AFE429B00036BFA /* ResponseModel.swift */; };
 		7C189F582AFE433300036BFA /* NetworkRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C189F572AFE433300036BFA /* NetworkRouting.swift */; };
 		7C189F5A2AFE436E00036BFA /* ImagesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C189F592AFE436E00036BFA /* ImagesLoader.swift */; };
+		7C189F5C2AFE49FE00036BFA /* ImagesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C189F5B2AFE49FE00036BFA /* ImagesFactory.swift */; };
+		7C189F612AFE577700036BFA /* ImagesModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C189F602AFE577700036BFA /* ImagesModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		7C189F542AFE429B00036BFA /* ResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseModel.swift; sourceTree = "<group>"; };
 		7C189F572AFE433300036BFA /* NetworkRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouting.swift; sourceTree = "<group>"; };
 		7C189F592AFE436E00036BFA /* ImagesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesLoader.swift; sourceTree = "<group>"; };
+		7C189F5B2AFE49FE00036BFA /* ImagesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesFactory.swift; sourceTree = "<group>"; };
+		7C189F602AFE577700036BFA /* ImagesModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +71,9 @@
 				7C189F3E2AFE2A8200036BFA /* AppDelegate.swift */,
 				7C189F402AFE2A8200036BFA /* SceneDelegate.swift */,
 				7C189F422AFE2A8200036BFA /* ListViewController.swift */,
+				7C189F5B2AFE49FE00036BFA /* ImagesFactory.swift */,
 				7C189F522AFE3A3400036BFA /* ImageListCell.swift */,
+				7C189F602AFE577700036BFA /* ImagesModels.swift */,
 				7C189F562AFE42C500036BFA /* NetworkService */,
 				7C189F442AFE2A8200036BFA /* Main.storyboard */,
 				7C189F472AFE2A8500036BFA /* Assets.xcassets */,
@@ -159,9 +165,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C189F432AFE2A8200036BFA /* ListViewController.swift in Sources */,
+				7C189F612AFE577700036BFA /* ImagesModels.swift in Sources */,
 				7C189F532AFE3A3400036BFA /* ImageListCell.swift in Sources */,
 				7C189F3F2AFE2A8200036BFA /* AppDelegate.swift in Sources */,
 				7C189F552AFE429B00036BFA /* ResponseModel.swift in Sources */,
+				7C189F5C2AFE49FE00036BFA /* ImagesFactory.swift in Sources */,
 				7C189F412AFE2A8200036BFA /* SceneDelegate.swift in Sources */,
 				7C189F582AFE433300036BFA /* NetworkRouting.swift in Sources */,
 				7C189F5A2AFE436E00036BFA /* ImagesLoader.swift in Sources */,
