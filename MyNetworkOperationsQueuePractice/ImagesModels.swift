@@ -6,18 +6,19 @@
 //
 
 import Foundation
+import UIKit
 
 struct HitList: Codable {
     let id: Int
-    let pageURL: String
-    let previewWidth, previewHeight: Int
-    let imageURL: String
-    let imageWidth, imageHeight, imageSize, views: Int
-    let user: String
-    let userImageURL: String
+    let previewURL: URL
+//    let previewWidth, previewHeight: Int
+//    let imageURL: String
+//    let imageWidth, imageHeight, imageSize, views: Int
+//    let user: String
+//    let userImageURL: String
 }
 
 struct ImagesListViewModel {
-    let pageURL: String
+    let previewImage: UIImage
     let user: String
 }

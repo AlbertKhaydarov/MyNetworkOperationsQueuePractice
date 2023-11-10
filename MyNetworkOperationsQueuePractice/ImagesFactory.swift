@@ -13,12 +13,20 @@ protocol ImagesFactoryProtocol {
     func loadData()
 }
 
+protocol ImagesListFactoryDelegate: AnyObject {
+    func didReceiveDataList(dataForList: [HitList])
+    func didLoadDataForListFromServer()
+    //    func didFailToLoadData(with error: Error)
+}
+
 class ImagesFactory: ImagesFactoryProtocol {
     
     private let networkManager: ImagesLoadingProtocol
+    weak private var delegate: ImagesListFactoryDelegate?
     
-    init(networkManager: ImagesLoadingProtocol) {
+    init(networkManager: ImagesLoadingProtocol, delegate: ImagesListFactoryDelegate) {
         self.networkManager = networkManager
+        self.delegate = delegate
     }
     
     private var hitsData: [Hit]?
@@ -31,7 +39,8 @@ class ImagesFactory: ImagesFactoryProtocol {
                 switch result {
                 case .success(let objects):
                     self.hitsData = objects.hits
-                    
+                
+                    self.delegate?.didLoadDataForListFromServer()
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -42,23 +51,29 @@ class ImagesFactory: ImagesFactoryProtocol {
     func requestImages() {
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
-            var imageData = Data()
+            guard let hitsData = hitsData else {return}
             hitsData.forEach { item in
-                let preview = item.previewURL
-                let previewURL = URL(string: preview)
-                var imageData = Data()
+           
+                guard let previewURL = URL(string: item.previewURL) else {return}
+                
                 let data = HitList(id: item.id,
-                                   pageURL: item.pageURL,
-                                   previewWidth: item.previewWidth,
-                                   previewHeight: item.previewHeight,
-                                   imageURL: item.imageURL,
-                                   imageWidth: item.imageWidth,
-                                   imageHeight: item.imageHeight,
-                                   imageSize: item.imageSize,
-                                   views: item.views,
-                                   user: item.user,
-                                   userImageURL: item.userImageURL)
+                                   previewURL: previewURL
+//                                   previewWidth: item.previewWidth,
+//                                   previewHeight: item.previewHeight,
+//                                   imageURL: item.largeImageURL,
+//                                   imageWidth: item.imageWidth,
+//                                   imageHeight: item.imageHeight,
+//                                   imageSize: item.imageSize,
+//                                   views: item.views,
+//                                   user: item.user,
+//                                   userImageURL: item.userImageURL
+                )
+                print(data)
                 self.items.append(data)
+            }
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.delegate?.didReceiveDataList(dataForList: self.items)
             }
         }
     }
