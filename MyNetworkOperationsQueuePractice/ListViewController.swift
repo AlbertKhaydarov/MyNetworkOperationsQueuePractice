@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreImage
 
 class ListViewController: UIViewController {
     
@@ -39,14 +40,16 @@ class ListViewController: UIViewController {
     
     func convert(items: [HitList]) -> [ImagesListViewModel] {
         var imageslist: [ImagesListViewModel] = []
-        var image = Data()
-                  items.forEach { item in
+        var image = UIImage()
+        items.forEach { item in
                 do {
-                    image = try Data(contentsOf: item.previewURL)
+                  let imageSet = try Data(contentsOf: item.previewURL)
+                    image = UIImage(data: imageSet) ?? UIImage()
+//                    guard let image = applySepiaFilter(unfilteredImage ?? UIImage()) else {return}
                 } catch {
                     print(error.localizedDescription)
                 }
-                    let imageData = ImagesListViewModel(previewImage: UIImage(data: image) ?? UIImage(),
+                      let imageData = ImagesListViewModel(previewImage: image,
                                                         user: String(item.id))
                     imageslist.append(imageData)
                 
@@ -59,6 +62,25 @@ class ListViewController: UIViewController {
         cell.imageViewInCell.image = file.previewImage
         cell.titleLabelInCell.text = file.user
     }
+    
+    
+//    func applySepiaFilter(_ image:UIImage) -> UIImage? {
+//      let inputImage = CIImage(data: UIImagePNGRepresentation(image)!)
+//      let context = CIContext(options:nil)
+//      let filter = CIFilter(name:"CISepiaTone")
+//      filter?.setValue(inputImage, forKey: kCIInputImageKey)
+//      filter!.setValue(0.8, forKey: "inputIntensity")
+//
+//      guard let outputImage = filter!.outputImage,
+//        let outImage = context.createCGImage(outputImage, from: outputImage.extent) else {
+//          return nil
+//      }
+//      return UIImage(cgImage: outImage)
+//    }
+//
+//    deinit{
+//        print("deinit VC")
+//    }
 }
 
     extension ListViewController: UITableViewDataSource {
@@ -102,7 +124,7 @@ extension ListViewController: ImagesListFactoryDelegate {
             
             DispatchQueue.main.async { [weak self] in
                 self?.show(dataFortableView: viewModel)
-                print(viewModel)
+   
             }
         }
     }

@@ -39,13 +39,15 @@ class ImagesFactory: ImagesFactoryProtocol {
                 switch result {
                 case .success(let objects):
                     self.hitsData = objects.hits
-                
-                    self.delegate?.didLoadDataForListFromServer()
+                    self.requestImages()
+                 
+//                    self.delegate?.didLoadDataForListFromServer()
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
         }
+      print(hitsData)
     }
     
     func requestImages() {
@@ -68,7 +70,6 @@ class ImagesFactory: ImagesFactoryProtocol {
 //                                   user: item.user,
 //                                   userImageURL: item.userImageURL
                 )
-                print(data)
                 self.items.append(data)
             }
             DispatchQueue.main.async { [weak self] in
